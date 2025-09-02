@@ -1,7 +1,7 @@
 # MS-Lab04: Genetic Algorithm for TSP
 
 **Modelación y Simulación 2025 - Lab 04**  
-*26.agosto.2025*
+_26.agosto.2025_
 
 A modular implementation of genetic algorithms for solving the Traveling Salesman Problem (TSP).
 
@@ -9,7 +9,7 @@ A modular implementation of genetic algorithms for solving the Traveling Salesma
 
 ```
 MS-Lab04/
-├── core/           # 🧬 Core GA Implementation (Person A)
+├── core/           # 🧬 Core GA Implementation
 │   ├── problem.py      # TSP problem representation
 │   ├── config.py       # GA configuration
 │   ├── result.py       # GA results
@@ -22,17 +22,17 @@ MS-Lab04/
 │   ├── diversity.py    # Diversity control & adaptive mechanisms
 │   └── ga_core.py      # Main GA algorithm
 │
-├── io/             # 📁 I/O & Data Management (Person B)
-│   └── (To be implemented)
+├── iotsp/              # 📁 I/O & Data Management
+│   └── tsplib.py       # Extract and parse data from Berlin52.tsp
 │
-├── viz/            # 📊 Visualization (Person C)
-│   └── (To be implemented)
+├── viz/            # 📊 Visualization
+│   └── tsp_visualizer.py # Render in real time the GA and TSP
 │
 ├── config/         # ⚙️  Shared configurations
 ├── data/           # 📊 TSP datasets (Berlin52, etc.)
 ├── tests/          # 🧪 Unit tests
 ├── examples/       # 💡 Usage examples
-└── docs/           # 📚 Documentation
+└── main.py         # Main program for testing TSP with visualization
 ```
 
 ## Quick Start
@@ -55,7 +55,7 @@ python -m pytest tests/test_operators.py -v
 
 - **TSPProblem**: Handles coordinates or distance matrices
 - **GAConfig**: Configuration with all GA parameters
-- **Individual**: Tour representation with fitness evaluation  
+- **Individual**: Tour representation with fitness evaluation
 - **Population**: Population management with diversity control
 - **Operators**: Selection, crossover (OX, PMX), mutation (swap, inversion)
 - **GA Core**: Main algorithm with adaptive mechanisms
@@ -66,7 +66,7 @@ python -m pytest tests/test_operators.py -v
 ✅ **Multiple Crossovers**: OX (Order) and PMX (Partially Mapped)  
 ✅ **Adaptive Mechanisms**: Stagnation detection, diversity control  
 ✅ **Elitism**: Preserves best individuals  
-✅ **Comprehensive Tests**: 15/15 unit tests pass  
+✅ **Comprehensive Tests**: 15/15 unit tests pass
 
 ### Usage
 
@@ -85,7 +85,7 @@ config = GAConfig(
     pct_crossover=0.5,      # 50% from crossover
     pct_mutation=0.2,       # 20% from mutation
     selection="tournament",
-    crossover="OX", 
+    crossover="OX",
     mutation="inversion",
     elitism=2,
     seed=42
@@ -133,16 +133,6 @@ result = run_ga(problem, config, callbacks=[viz_callback])
 
 1. **Core Module**: ✅ Complete and tested
 2. **I/O Module**: Use `core.TSPProblem` for data loading
-3. **Viz Module**: Use callbacks for real-time updates  
+3. **Viz Module**: Use callbacks for real-time updates
 4. **Testing**: Run `pytest` before commits
 5. **Imports**: Use direct imports (`from core import ...`)
-
-## Files Overview
-
-| Directory | Status | Responsibility |
-|-----------|--------|---------------|
-| `core/`   | ✅ Complete | Person A - GA algorithms |
-| `io/`     | 📝 Pending  | Person B - Data & experiments |
-| `viz/`    | 📝 Pending  | Person C - Visualization |
-| `tests/`  | ✅ Working  | Unit tests (15 passing) |
-| `examples/` | ✅ Working | Usage examples |
