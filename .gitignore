@@ -46,6 +46,8 @@ htmlcov/
 
 # Data files (TSP datasets)
 *.tsp
+*.tsp.*
+!berlin52.tsp
 *.tour
 data/raw/
 data/processed/

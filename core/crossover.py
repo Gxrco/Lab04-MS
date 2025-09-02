@@ -133,28 +133,27 @@ def crossover_pmx(parent1: Individual, parent2: Individual) -> Tuple[Individual,
     return child1, child2
 
 
-def _fill_pmx_positions(child_tour: List[int], parent_tour: List[int], 
-                       mapping: dict, cut1: int, cut2: int):
-    """Fill remaining positions in PMX crossover."""
+def _fill_pmx_positions(child_tour, parent_tour, mapping, cut1, cut2):
     n = len(child_tour)
-    
+    taken = set(x for x in child_tour if x != -1)
     for i in range(n):
-        if child_tour[i] == -1:  # Empty position
-            city = parent_tour[i]
-            
-            # Check if city is already in child (in copied segment)
-            while city in child_tour:
-                if city in mapping:
-                    city = mapping[city]
-                else:
-                    # Find an unmapped city
-                    for candidate in range(n):
-                        if candidate not in child_tour:
-                            city = candidate
-                            break
+        if child_tour[i] != -1:
+            continue
+        city = parent_tour[i]
+        # Seguir la cadena de mapeo hasta un valor libre
+        visited = set()
+        while city in taken and city in mapping and city not in visited:
+            visited.add(city)
+            city = mapping[city]
+        # Si sigue ocupado y no hay mapeo, buscar siguiente ciudad del padre que no esté tomada
+        if city in taken:
+            for cand in parent_tour:
+                if cand not in taken:
+                    city = cand
                     break
-            
-            child_tour[i] = city
+        child_tour[i] = city
+        taken.add(city)
+
 
 
 def create_offspring_crossover(parents: List[Individual], num_offspring: int, 

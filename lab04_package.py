@@ -12,7 +12,7 @@ Modules:
 """
 
 from . import core
-from . import io
+from . import iotsp
 from . import viz
 from . import config
 from . import data
@@ -24,7 +24,7 @@ __version__ = "1.0.0"
 
 __all__ = [
     'core',
-    'io', 
+    'iotsp', 
     'viz',
     'config',
     'data',
